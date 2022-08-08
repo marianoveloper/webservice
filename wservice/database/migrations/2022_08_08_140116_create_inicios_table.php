@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('inicios', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('shortname')->unique();
+            $table->unsignedBigInteger('plantilla_id');
+            $table->foreign('plantilla_id')->references('id')->on('plantillas')->onDelete('cascade');
             $table->timestamps();
         });
     }

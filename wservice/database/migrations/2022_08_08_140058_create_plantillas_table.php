@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('plantillas', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('shortname')->unique();
             $table->timestamps();
         });
     }

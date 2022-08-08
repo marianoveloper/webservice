@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Inicio extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function plantilla(){
+        return $this->belongsTo(Plantilla::class);
+    }
 }
