@@ -9,7 +9,7 @@
 @section('content')
 
 
-
+<div class="card"><div class="card-header"> <a Class="btn btn-primary" href="#" role="button">Crear Categoria</a> </div>
 
 
 <table class="table">
@@ -30,6 +30,7 @@
             @endforeach
     </tbody>
   </table>
+</div>
 @stop
 
 @section('css')
