@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 
 class CategoriaController extends Controller
 {
@@ -20,7 +21,8 @@ class CategoriaController extends Controller
        $functionname="core_course_get_categories";
        $serverurl=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json';
 
-       return $serverurl;
+       $categorias=Http::get($serverurl);
+       return view('admin.categoria.index',compact('categorias'));
     }
 
     /**
