@@ -32,7 +32,11 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        $functionname="core_course_get_categories";
+        $serverurl=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json';
+
+        $categorias=Http::get($serverurl);
+        return view('admin.categoria.create',compact('categorias'));
     }
 
     /**

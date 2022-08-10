@@ -9,7 +9,7 @@
 @section('content')
 
 
-<div class="card"><div class="card-header"> <a Class="btn btn-primary" href="#" role="button">Crear Categoria</a> </div>
+<div class="card"><div class="card-header"> <a Class="btn btn-primary" href="{{'admin.categorias.create'}}" role="button">Crear Categoria</a> </div>
 
 
 <table class="table">
@@ -35,6 +35,8 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 @stop
 
 @section('js')
