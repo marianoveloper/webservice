@@ -8,6 +8,11 @@
 
 @section('content')
 
+@if(session('info'))
+<div class="alert alert-success">
+    <strong>{{session('info')}}</strong>
+</div>
+
 
 <div class="card"><div class="card-header"> <a Class="btn btn-primary" href="{{'admin.categorias.create'}}" role="button">Crear Categoria</a> </div>
 
@@ -24,7 +29,7 @@
         @foreach(json_decode($categorias) as $item)
             <tr>
                 <th> {{$item->name}}</th>
-                <td>Eliminar</td>
+                <td><a class="btn btn-info" href="{{route('admin.categorias.edit',$item->id)}}" role="button"></a>Editar</td>
 
             </tr>
             @endforeach

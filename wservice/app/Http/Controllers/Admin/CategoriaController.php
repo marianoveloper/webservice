@@ -47,6 +47,29 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'scategoria'=>'required',
+            'idnumber'=>'required',
+            'description'=>'required',
+        ]);
+
+        $name= $request->input('name');
+        $parent=$request->input('scategoria');
+        $idnumber=$request->input('idnumber');
+        $description=$request->input('description');
+        $descriptionformat= 1;
+        $functionname= 'core_course_create_catefories';
+        $serverurl=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json'
+        .'&categories[0][name]='.$name
+        .'categories[0][parent]='.$parent
+        .'categories[0][idnumber]='.$idnumber
+        .'categories[0][description]='.$description
+        .'categories[0][descriptionformat]='.$descriptionformat;
+
+        $createcategory=Http::get($serverurl);
+
+        return redirect()->route('admin.categorias.index')->with('info','se creo la categoria');
 
     }
 
@@ -69,7 +92,15 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $functionname="core_course_get_categories";
+        $serverurl=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json';
+
+        $serverurl2=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json&criteria[0][key]=id&criteria[0][value]='.$id;
+
+        $categorias=Http::get($serverurl);
+        $ecategorias=Http::get($serverurl2);
+
+        return view('admin.categorias.edit',compact('categorias','ecategorias'));
     }
 
     /**

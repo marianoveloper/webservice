@@ -3,13 +3,18 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Crear Categorias de Moodle</h1>
+    <h1>Editar Categorias de Moodle</h1>
 @stop
 
 @section('content')
 
-<div class="card"><div class="card-header">Bienvenido
- </div>
+@php
+   @foreach(json_decode($ecategorias) as $cat) {
+
+    }
+@endphp
+
+<div class="card"><div class="card-header">Editar tu Categoria </div>
 <div class="card-body">
     <form action="{{route('admin.categorias.store')}}" method="POST">
         @csrf
@@ -25,21 +30,21 @@
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nombre de la categoria</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" value="{{$cat->name}}">
             @error('name')
                 <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
         <div class="mb-3">
             <label for="idnumber" class="form-label">idnumber</label>
-            <input type="text" class="form-control" id="idnumber" name="idnumber">
+            <input type="text" class="form-control" id="idnumber" name="idnumber" value="{{$cat->idnumber}}">
             @error('idnumber')
                 <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Descripcion</label>
-            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" value="{{$cat->description}}"></textarea>
             @error('description')
                 <span class="text-danger">{{$message}}</span>
             @enderror
