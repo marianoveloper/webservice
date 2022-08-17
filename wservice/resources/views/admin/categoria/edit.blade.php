@@ -24,7 +24,11 @@
                 <option selected>Open this select menu</option>
                 <option value="0">Superior</option>
                 @foreach(json_decode($categorias) as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
+                        @if($item->id = $cat->partent)
+                        <option value="{{$item->id}}" selected></option>
+                        @else
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endif
                 @endforeach
             </select>
         </div>

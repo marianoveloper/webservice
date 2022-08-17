@@ -95,7 +95,12 @@ class CategoriaController extends Controller
         $functionname="core_course_get_categories";
         $serverurl=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json';
 
-        $serverurl2=$this->domainname.'/webservice/rest/server.php'.'?wstoken='.$this->token.'&wsfunction='.$functionname.'&moodlewsrestformat=json&criteria[0][key]=id&criteria[0][value]='.$id;
+        $serverurl2=$this->domainname.'/webservice/rest/server.php'
+        .'?wstoken='.$this->token
+        .'&wsfunction='.$functionname
+        .'&moodlewsrestformat=json
+        &addsubcategories=
+        &criteria[0][key]=id&criteria[0][value]='.$id;
 
         $categorias=Http::get($serverurl);
         $ecategorias=Http::get($serverurl2);
