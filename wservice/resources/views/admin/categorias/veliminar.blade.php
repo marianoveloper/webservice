@@ -3,29 +3,34 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Editar Categorias de Moodle</h1>
+    <h1>Eliminar Categorias de Moodle</h1>
 @stop
 
 @section('content')
 
 @php
-   @foreach(json_decode($ecategorias) as $cat) {
+   foreach(json_decode($ecategoria) as $cat) {
 
     }
 @endphp
 
 <div class="card"><div class="card-header">Editar tu Categoria </div>
 <div class="card-body">
-    <form action="{{route('admin.categorias.store')}}" method="POST">
+    <form action="{{route('admin.categorias.update',$cat->id)}}" method="POST">
         @csrf
+        @method('put')
+        <input name="id" id="id" type="hidden" value="{{$cat->id}}">
         <div class="mb-3">
             <label for="scategoria" class="form-label"></label>
             <select class="form-select" aria-label="Default select example" id="scategoria" name="scategoria">
-                <option selected>Open this select menu</option>
+                @if($cat->parent==0)
+                    <option value="0" selected>Superior</option>
+                @else
                 <option value="0">Superior</option>
+                @endif
                 @foreach(json_decode($categorias) as $item)
-                        @if($item->id = $cat->partent)
-                        <option value="{{$item->id}}" selected></option>
+                        @if($item->id == $cat->parent)
+                        <option value="{{$item->id}}" selected>{{$item->name}}</option>
                         @else
                         <option value="{{$item->id}}">{{$item->name}}</option>
                         @endif
@@ -48,13 +53,13 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Descripcion</label>
-            <textarea class="form-control" id="description" rows="3" name="description" value="{{$cat->description}}"></textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" >{{$cat->description}}</textarea>
             @error('description')
                 <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Crear Categoria</button>
+            <button type="submit" class="btn btn-danger">Eliminar Categoria</button>
             <a class="btn btn-dark" href="{{route('admin.categorias.index')}}" role="button">Cancelar</a>
         </div>
     </form>

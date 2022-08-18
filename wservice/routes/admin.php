@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 Route::resource('categorias', CategoriaController::class)->names('categorias');
-
+Route::get('categorias/{id}/veliminar',[CategoriaController::class,'veliminar'])->name('categorias.veliminar');

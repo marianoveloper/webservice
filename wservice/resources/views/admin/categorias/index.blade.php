@@ -12,9 +12,9 @@
 <div class="alert alert-success">
     <strong>{{session('info')}}</strong>
 </div>
+@endif
 
-
-<div class="card"><div class="card-header"> <a Class="btn btn-primary" href="{{'admin.categorias.create'}}" role="button">Crear Categoria</a> </div>
+<div class="card"><div class="card-header"> <a Class="btn btn-primary" href="{{route('admin.categorias.create')}}" role="button">Crear Categoria</a> </div>
 
 
 <table class="table">
@@ -29,7 +29,10 @@
         @foreach(json_decode($categorias) as $item)
             <tr>
                 <th> {{$item->name}}</th>
-                <td><a class="btn btn-info" href="{{route('admin.categorias.edit',$item->id)}}" role="button"></a>Editar</td>
+                <td>
+                    <a class="btn btn-info" href="{{route('admin.categorias.edit',$item->id)}}" role="button">Editar</a>
+                    <a class="btn btn-danger" href="{{route('admin.categorias.veliminar',$item->id)}}" role="button">Eliminar</a>
+                </td>
 
             </tr>
             @endforeach
