@@ -253,6 +253,11 @@ return [
             'route'=> 'admin.categorias.index',
             'icon' => 'fab fa-accusoft',
         ],
+        [
+            'text' => 'cursos',
+            'route'=> 'admin.cursos.index',
+            'icon' => 'fas fa-book',
+        ],
 
 
     ],
