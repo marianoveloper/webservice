@@ -15,7 +15,8 @@ class CursoController extends Controller
      */
     public function index()
     {
-        return view('admin.cursos.index');
+        $cursos=Curso::all();
+        return view('admin.cursos.index',compact('cursos'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('admin.cursos.index');
+        return view('admin.cursos.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'shortname'=>'required|unique:cursos|alpha_dash',
+        ]);
+       $curso=Curso::create($request->all());
+
+       return redirect()->route('admin.cursos.index')->with('info','el curso se creo correctamente');
     }
 
     /**
@@ -58,7 +65,7 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
-        //
+        return view('admin.cursos.edit',compact('curso'));
     }
 
     /**
@@ -70,7 +77,13 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'shortname'=>'required|unique:cursos,shortname,'.$curso->id.'|alpha_dash',
+        ]);
+        $curso->update($request->all());
+
+        return redirect()->route('admin.cursos.index')->with('info','el curso se actualizó correctamente');
     }
 
     /**
@@ -81,6 +94,7 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
-        //
+       $curso->delete();
+       return redirect()->route('admin.cursos.index')->with('info','el curso se elimino correctamente');
     }
 }

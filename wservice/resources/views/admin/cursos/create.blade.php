@@ -19,13 +19,19 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre del Curso</label>
                 <input type="text" class="form-control" id="name" name="name">
+                @error('name')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre del Curso corto</label>
                 <input type="text" class="form-control" id="shortname" name="shortname">
+                @error('shortname')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
             </div>
             <div class="mb-3">
-                <button class="btn btn-primary" type="submit">Crear Categoria</button>
+                <button class="btn btn-primary" type="submit">Crear Curso</button>
                 <a href="{{route('admin.cursos.index')}}" class="btn btn-dark" role="button">Cancelar</a>
             </div>
         </form>

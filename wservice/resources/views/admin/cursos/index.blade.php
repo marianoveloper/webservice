@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+@if(session('info'))
+<div class="alert alert-success">
+    <strong>{{session('info')}}</strong>
+</div>
+@endif
 <div class="card">
     <div class="card-header">
         <a class="btn btn-primary" href="{{route('admin.cursos.create')}}" role="button">Crear Curso</a>
@@ -22,15 +27,22 @@
               </tr>
             </thead>
             <tbody>
+                @foreach(json_decode($cursos) as $item)
               <tr>
-                <th scope="row">Matematica</th>
-                <td>Mat-2022</td>
+                <th scope="row">{{$item->name}}</th>
+                <td>{{$item->shortname}}</td>
                 <td>
-                    <a class="btn btn-info" href="{{route('admin.cursos.edit',$item->id)}}" role="button">Editar</a>
-                    <a class="btn btn-danger" href="{{route('admin.cursos.destroy',$item->id)}}" role="button">Eliminar</a>
+
+
+                <form action="{{route('admin.cursos.destroy',$curso->id)}}" method="POST"></form>
+                @csrf
+                @method('delete')
+                <a class="btn btn-info" href="{{route('admin.cursos.edit',$item->id)}}" role="button">Editar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
                 </td>
               </tr>
-
+              @endforeach
             </tbody>
           </table>
     </div>
