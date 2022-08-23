@@ -34,7 +34,7 @@
                 <td>
 
 
-                <form action="{{route('admin.cursos.destroy',$curso->id)}}" method="POST"></form>
+                <form action="{{route('admin.cursos.destroy',$item->id)}}" method="POST"></form>
                 @csrf
                 @method('delete')
                 <a class="btn btn-info" href="{{route('admin.cursos.edit',$item->id)}}" role="button">Editar</a>

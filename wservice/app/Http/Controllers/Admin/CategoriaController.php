@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class CategoriaController extends Controller
 {
-    private $token="b02426262cc38ff6d8b45769bca408fd";
-    private $domainname="http://34.125.207.192/moodle";
+    private $token="7fba2433dacabb6fbd93a40e2756499b";
+    private $domainname="http://34.125.169.24/moodle";
 
     /**
      * Display a listing of the resource.

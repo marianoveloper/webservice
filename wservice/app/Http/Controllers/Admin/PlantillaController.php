@@ -15,7 +15,8 @@ class PlantillaController extends Controller
      */
     public function index()
     {
-        //
+        $plantillas=Plantilla::all();
+        return view('admin.plantillas.index',compact('plantillas'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PlantillaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.plantillas.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class PlantillaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'shortname'=>'required|unique:cursos|alpha_dash',
+        ]);
+       $plantilla=Plantilla::create($request->all());
+
+       return redirect()->route('admin.plantillas.index')->with('info','la plantilla se creo correctamente');
     }
 
     /**
@@ -58,7 +65,7 @@ class PlantillaController extends Controller
      */
     public function edit(Plantilla $plantilla)
     {
-        //
+        return view('admin.plantillas.edit',compact('plantilla'));
     }
 
     /**
