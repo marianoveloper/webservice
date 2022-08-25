@@ -258,7 +258,11 @@ return [
             'route'=> 'admin.cursos.index',
             'icon' => 'fas fa-book',
         ],
-
+        [
+            'text' => 'plantillas',
+            'route'=> 'admin.plantillas.index',
+            'icon' => 'fas fa-list',
+        ],
 
     ],
 

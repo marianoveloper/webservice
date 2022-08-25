@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Curso;
 use App\Models\Plantilla;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PlantillaController extends Controller
 {
@@ -39,7 +40,7 @@ class PlantillaController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'shortname'=>'required|unique:cursos|alpha_dash',
+            'shortname'=>'required|unique:plantillas|alpha_dash',
         ]);
        $plantilla=Plantilla::create($request->all());
 
@@ -77,9 +78,15 @@ class PlantillaController extends Controller
      */
     public function update(Request $request, Plantilla $plantilla)
     {
-        //
-    }
+        $request->validate([
+            'name'=>'required',
+            'shortname'=>'required|unique:plantillas,shortname,'.$curso->id.'|alpha_dash',
+        ]);
+        $plantilla->update($request->all());
 
+        return redirect()->route('admin.plantillas.index')->with('info','la plantilla se actualizó correctamente');
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -88,6 +95,42 @@ class PlantillaController extends Controller
      */
     public function destroy(Plantilla $plantilla)
     {
-        //
+        $plantilla->delete();
+       return redirect()->route('admin.plantillas.index')->with('info','la plantilla se elimino correctamente');
+    }
+
+    public function asignar(Plantilla $id){
+
+        $plantilla= $id;
+
+        $cursos=  Curso::all();
+
+        //dd($cursos);
+        return view('admin.plantillas.asignar',compact('plantilla','cursos'));
+    }
+
+    public function agregarcurso(Request $request){
+
+        $plantilla=$request->input('plantilla_id');
+        $curso=$request->input('curso_id');
+
+        $oplantilla=Plantilla::find($plantilla);
+        $oplantilla->cursos()->attach($curso);
+
+        return redirect()->route('admin.plantillas.asignar',$plantilla)->with('info','el curso se agrego correctamente en la plantilla');
+
+    }
+
+
+    public function eliminarcurso(Request $request){
+
+        $plantilla=$request->input('plantilla_id');
+        $curso=$request->input('curso_id');
+
+        $oplantilla=Plantilla::find($plantilla);
+        $oplantilla->cursos()->detach($curso);
+
+        return redirect()->route('admin.plantillas.asignar',$plantilla)->with('info','el curso se elimino correctamente de la plantilla');
+
     }
 }
