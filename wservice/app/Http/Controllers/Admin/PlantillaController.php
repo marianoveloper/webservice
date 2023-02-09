@@ -44,6 +44,7 @@ class PlantillaController extends Controller
         ]);
        $plantilla=Plantilla::create($request->all());
 
+
        return redirect()->route('admin.plantillas.index')->with('info','la plantilla se creo correctamente');
     }
 
